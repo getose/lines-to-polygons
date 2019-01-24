@@ -2,21 +2,21 @@
  *
  * @param {[{start : {x, y}, end : {x, y}}] lines
  */
-function linesToPolygons(lines) {
-  var polygons = [];
+const linesToPolygons = lines => {
+  const polygons = [];
   for (var i = 0; i < lines.length; i++) {
     // Récupération et suppression du tableau du premier élément
-    var currentLine = lines.splice(i--, 1)[0];
+    const currentLine = lines.splice(i--, 1)[0];
     // create a new polygon array
-    var polygon = [];
+    const polygon = [];
     // put the first line on the polygon array
     polygon.push({ line: currentLine });
     // initi current start point and current end point
-    var currentstart = currentLine.start;
-    var currentend = currentLine.end;
-    var j = 0;
+    let currentstart = currentLine.start;
+    let currentend = currentLine.end;
+    let j = 0;
     // init the linesLength
-    var linesLength = lines.length;
+    let linesLength = lines.length;
     while (lines.length && (j < lines.length || linesLength != lines.length)) {
       // if j == lines.length, we have to return to the first index and redefine linesLength to the new lines.length
       if (j == lines.length) {
@@ -24,9 +24,9 @@ function linesToPolygons(lines) {
         linesLength = lines.length;
       }
       // The nextLine in the array
-      var nextLine = lines[j++];
-      var nextstart = nextLine.start;
-      var nextend = nextLine.end;
+      const nextLine = lines[j++];
+      const nextstart = nextLine.start;
+      const nextend = nextLine.end;
       if (
         currentend.x === nextLine.start.x &&
         currentend.y === nextLine.start.y
@@ -53,7 +53,6 @@ function linesToPolygons(lines) {
         currentend.y === nextLine.end.y
       ) {
         // the end point of the current line equals to the end point of the next line
-        // console.log("end -> endPint");
         nextLine.start = nextend;
         nextLine.end = nextstart;
         polygon.push({ line: nextLine });
@@ -63,7 +62,6 @@ function linesToPolygons(lines) {
         currentstart.y == nextLine.end.y
       ) {
         // the start point of the current line equals to the end point of the next line
-        // console.log("start -> end");
         polygon.unshift({ line: nextLine });
         // Mise à jour du nouveau point de départ courant
         currentstart = nextLine.start;
@@ -82,6 +80,6 @@ function linesToPolygons(lines) {
     }
   }
   return polygons;
-}
+};
 
-module.exports = linesToPolygons;
+export default linesToPolygons;

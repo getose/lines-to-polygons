@@ -7,13 +7,23 @@
     "polygons",
     "lines"
   ],
-  "main": "src/lines-to-polygons.js",
+  "main": "lib/lines-to-polygons.js",
   "scripts": {
-    "test": "mocha test --recursive --watch"
+    "build": "babel src --out-dir lib",
+    "test": "npm run build && mocha test --recursive"
   },
   "author": "Florent Muller",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.2.0"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
