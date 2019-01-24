@@ -1,0 +1,19 @@
+{
+  "name": "lines-to-polygons",
+  "version": "1.0.0",
+  "description": "A JavaScript library to build polygons from an unordered list of independant lines.",
+  "keywords": [
+    "build",
+    "polygons",
+    "lines"
+  ],
+  "main": "src/lines-to-polygons.js",
+  "scripts": {
+    "test": "mocha test --recursive --watch"
+  },
+  "author": "Florent Muller",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
+}
