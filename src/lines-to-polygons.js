@@ -1,16 +1,16 @@
 /**
  *
- * @param {[{start : {x, y}, end : {x, y}}] lines
+ * @param [{{start : {x, y}, end : {x, y}}] lines
  */
-const linesToPolygons = lines => {
+const linesToPolygons = (lines) => {
   const polygons = [];
   for (var i = 0; i < lines.length; i++) {
     // Récupération et suppression du tableau du premier élément
     const currentLine = lines.splice(i--, 1)[0];
     // create a new polygon array
     const polygon = [];
-    // put the first line on the polygon array
-    polygon.push({ line: currentLine });
+    // put the 2 points of the first line on the polygon array
+    polygon.push(currentLine.start, currentLine.end);
     // initi current start point and current end point
     let currentstart = currentLine.start;
     let currentend = currentLine.end;
@@ -25,15 +25,29 @@ const linesToPolygons = lines => {
       }
       // The nextLine in the array
       const nextLine = lines[j++];
-      const nextstart = nextLine.start;
-      const nextend = nextLine.end;
+      // min 3 lines to have a closed polygon
+      // check if the polygon is closed (the nextLine start point is one of the current start or end point and the nextLine end point is one of the current start or end point)
+      if (
+        polygon.length >= 3 &&
+        ((currentend.x === nextLine.start.x &&
+          currentend.y === nextLine.start.y &&
+          currentstart.x === nextLine.end.x &&
+          currentstart.y === nextLine.end.y) ||
+          (currentstart.x === nextLine.start.x &&
+            currentstart.y === nextLine.start.y &&
+            currentend.x === nextLine.end.x &&
+            currentend.y === nextLine.end.y))
+      ) {
+        polygons.push(polygon);
+        break;
+      }
       if (
         currentend.x === nextLine.start.x &&
         currentend.y === nextLine.start.y
       ) {
-        // the end point of the current line equals to the start point of the next line
-        polygon.push({ line: nextLine });
-        // update to the new end point
+        // end point of the current line equals to start point of the next line
+        polygon.push(nextLine.end);
+        // update current end point
         currentend = nextLine.end;
         // Suppression de la ligne dans le tableau
         lines.splice(--j, 1);
@@ -41,41 +55,29 @@ const linesToPolygons = lines => {
         currentstart.x === nextLine.start.x &&
         currentstart.y === nextLine.start.y
       ) {
-        // the start point of the current line equals to the start point of the next line
-        // switch the start point and the end point for the next line
-        nextLine.start = nextend;
-        nextLine.end = nextstart;
-        polygon.unshift({ line: nextLine });
-        currentstart = nextLine.start;
+        // start point of the current line equals to start point of the next line
+        polygon.unshift(nextLine.end);
+        // update current start point
+        currentstart = nextLine.end;
         lines.splice(--j, 1);
       } else if (
         currentend.x === nextLine.end.x &&
         currentend.y === nextLine.end.y
       ) {
-        // the end point of the current line equals to the end point of the next line
-        nextLine.start = nextend;
-        nextLine.end = nextstart;
-        polygon.push({ line: nextLine });
+        // end point of the current line equals to end point of the next line
+        polygon.push(nextLine.start);
+        // update current end point
+        currentend = nextLine.start;
         lines.splice(--j, 1);
       } else if (
         currentstart.x == nextLine.end.x &&
         currentstart.y == nextLine.end.y
       ) {
-        // the start point of the current line equals to the end point of the next line
-        polygon.unshift({ line: nextLine });
-        // Mise à jour du nouveau point de départ courant
+        // start point of the current line equals to end point of the next line
+        polygon.unshift(nextLine.start);
+        // update current start point
         currentstart = nextLine.start;
         lines.splice(--j, 1);
-      }
-      // min 3 lines to have a closed polygon
-      // check if the polygon is closed (the first line start point equals to the last line end point)
-      if (
-        polygon.length >= 3 &&
-        polygon[0].line.start.x == polygon[polygon.length - 1].line.end.x &&
-        polygon[0].line.start.y == polygon[polygon.length - 1].line.end.y
-      ) {
-        polygons.push(polygon);
-        break;
       }
     }
   }
