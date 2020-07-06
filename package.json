@@ -1,19 +1,27 @@
 {
   "name": "lines-to-polygons",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A JavaScript library to build polygons from an unordered list of independant lines.",
   "keywords": [
     "build",
     "polygons",
+    "unordered",
+    "list",
+    "independents",
     "lines"
   ],
   "main": "lib/lines-to-polygons.js",
   "scripts": {
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib --no-comments",
     "test": "npm run build && mocha test --recursive"
   },
   "author": "Florent Muller",
   "license": "MIT",
+  "homepage": "https://github.com/getose/lines-to-polygons#readme",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/getose/lines-to-polygons"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
