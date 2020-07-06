@@ -22,6 +22,7 @@
     "type": "git",
     "url": "https://github.com/getose/lines-to-polygons"
   },
+  "files": [],
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
