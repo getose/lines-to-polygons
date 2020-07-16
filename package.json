@@ -10,7 +10,7 @@
     "independents",
     "lines"
   ],
-  "main": "lib/lines-to-polygons.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib --no-comments",
     "test": "npm run build && mocha test --recursive"

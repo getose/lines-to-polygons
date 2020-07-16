@@ -1,6 +1,6 @@
 var chai = require("chai");
 var expect = chai.expect;
-var linesToPolygons = require("../lib/lines-to-polygons");
+var linesToPolygons = require("../lib/index");
 
 describe("linesToPolygons", function () {
   var point00 = [0, 0];
