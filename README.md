@@ -2,7 +2,7 @@
 
 A JavaScript library to build polygons from an unordered list of independant lines.
 
-## Geting started
+## Getting started
 
 ### Install
 
@@ -32,31 +32,31 @@ var polygons = linesToPolygons(lines);
 
 ```js
 var lines = [
-  {
+  [
     // AB
-    start: { x: 3, y: 1 },
-    end: { x: 5, y: 1 },
-  },
-  {
+    [3, 1],
+    [5, 1],
+  ],
+  [
     // DC
-    start: { x: 4, y: 4 },
-    end: { x: 6, y: 3 },
-  },
-  {
+    [4, 4],
+    [6, 3],
+  ],
+  [
     // DE
-    start: { x: 4, y: 4 },
-    end: { x: 2, y: 3 },
-  },
-  {
+    [4, 4],
+    [2, 3],
+  ],
+  [
     // CB
-    start: { x: 6, y: 3 },
-    end: { x: 5, y: 1 },
-  },
-  {
+    [6, 3],
+    [5, 1],
+  ],
+  [
     // EA
-    start: { x: 2, y: 3 },
-    end: { x: 3, y: 1 },
-  },
+    [2, 3],
+    [3, 1],
+  ],
 ];
 
 var polygons = linesToPolygons(lines);
