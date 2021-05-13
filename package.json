@@ -1,6 +1,6 @@
 {
   "name": "lines-to-polygons",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A JavaScript library to build polygons from an unordered list of independant lines.",
   "keywords": [
     "build",
